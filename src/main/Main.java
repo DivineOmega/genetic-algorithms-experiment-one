@@ -1,22 +1,40 @@
 package main;
 
-import util.GenomeUtils;
+import genetics.Population;
+
+import java.util.Scanner;
 
 public class Main
 {
+	public static String idealSpecimen = "";
+	
 	public static void main(String[] args)
-	{		
-		String stringGenome = "test";
+	{
+		Scanner keyboard = new Scanner(System.in);
 		
-		System.out.println("Starting string genome: "+stringGenome);
+		System.out.println("Define a 5x5 ideal specimen.");
 		
-		String binaryGenome = GenomeUtils.encodeStringToBinaryGenome(stringGenome);
+		for (int i = 0; i < 5; i++)
+		{
+			String specimenLine = "";
+			
+			while(specimenLine.length()!=5)
+			{
+				System.out.print("Line "+(i+1)+": ");
+				specimenLine = keyboard.nextLine();
+			}
+			
+			idealSpecimen = idealSpecimen.concat(specimenLine);
+			idealSpecimen = idealSpecimen + '\n';
+		}
 		
-		System.out.println("Encoded to binary genome: "+binaryGenome);
+		System.out.println("Ideal specimen defined.");
 		
-		stringGenome = GenomeUtils.decodeBinaryGenomeToString(binaryGenome);
+		System.out.println("Generating new population...");
 		
-		System.out.println("Decoded back to string genome: "+stringGenome);
+		Population population = new Population();
+		
+		population.createNew(40);
 	}
-
+	
 }
