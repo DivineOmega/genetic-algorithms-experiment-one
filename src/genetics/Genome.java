@@ -3,6 +3,7 @@ package genetics;
 import java.util.Random;
 
 import util.GenomeUtils;
+import util.StringUtils;
 
 public class Genome
 {
@@ -27,8 +28,10 @@ public class Genome
 		
 	}
 	
-	public void displaySpecimen()
+	public String getSpecimen()
 	{
+		String specimen = "";
+		
 		String stringGenome = new String();
 		
 		stringGenome = GenomeUtils.decodeBinaryGenomeToString(binaryGenome);
@@ -37,10 +40,22 @@ public class Genome
 		{
 			for (int j = 0; j < 5; j++)
 			{
-				System.out.print(stringGenome.charAt((i*5)+j));
+				specimen = specimen + stringGenome.charAt((i*5)+j);
 			}
-			System.out.println();
+			specimen = specimen + '\n';
 		}
+		
+		return specimen;
 	}
-
+		
+	public int getFitness(String idealSpecimen)
+	{
+		int fitness = 0;
+				
+		int levensteinDistance = StringUtils.levensteinDistance(getSpecimen(), idealSpecimen);
+		
+		fitness = idealSpecimen.length() - levensteinDistance;
+		
+		return fitness;
+	}
 }

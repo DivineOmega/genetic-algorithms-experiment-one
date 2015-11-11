@@ -1,6 +1,7 @@
 package genetics;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Population
 {
@@ -17,6 +18,23 @@ public class Population
 			newGenome.randomizeGenome();
 			
 			genomes.add(newGenome);
+		}
+	}
+
+	public void evaluate(String idealSpecimen) 
+	{
+		int x = 0;
+		
+		for (Genome genome: genomes) 
+		{
+			int fitness = genome.getFitness(idealSpecimen);
+			
+			System.out.println("- Specimen "+x);
+			System.out.println("  - Fitness: "+fitness);
+			
+			System.out.println(genome.getSpecimen());
+			
+			System.out.println();
 		}
 	}
 	
