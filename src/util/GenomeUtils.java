@@ -76,7 +76,7 @@ public abstract class GenomeUtils
 			{
 				StringBuilder binaryGenomeStringBuilder = new StringBuilder(child.binaryGenome);
 				
-				if (child.binaryGenome.charAt(i)==1)
+				if (child.binaryGenome.charAt(i)=='1')
 				{
 					binaryGenomeStringBuilder.setCharAt(i, '0');
 				}
