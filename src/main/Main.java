@@ -12,7 +12,7 @@ public class Main
 {
 	public static String idealSpecimen = "";
 	
-	final static int populationSize = 500;
+	final static int populationSize = 100;
 	
 	public static void main(String[] args)
 	{
@@ -61,15 +61,7 @@ public class Main
 			
 			Population newPopulation = new Population();
 			newPopulation.generation = generation;
-			
-			while(newPopulation.genomes.size()<(populationSize*0.02))
-			{
-				Genome newGenome = new Genome();
-				newGenome.randomizeGenome();
-				
-				newPopulation.genomes.add(newGenome);
-			}
-			
+						
 			while(newPopulation.genomes.size()<populationSize)
 			{
 				ArrayList<Genome> selectedParents = population.rouletteWheelSelection();
