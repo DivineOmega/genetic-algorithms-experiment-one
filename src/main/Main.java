@@ -51,11 +51,17 @@ public class Main
 		
 		population.createRandom(generation, populationSize);
 		
-		while(generation<100000)
+		while(generation<Integer.MAX_VALUE)
 		{
 			population.evaluateFitness(idealSpecimen);
 			
 			population.displayBest();
+			
+			if (population.getBest().getSpecimen().equals(idealSpecimen))
+			{
+				System.out.println("Ideal specimen found!");
+				break;
+			}
 			
 			generation++;
 			
