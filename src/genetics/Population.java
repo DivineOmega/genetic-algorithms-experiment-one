@@ -44,10 +44,8 @@ public class Population
 		}
 	}
 	
-	public void displayBest() 
+	public Genome getBest()
 	{
-		System.out.println("- Best Specimen (Generation: "+generation+")");
-		
 		Genome bestGenome = genomes.get(0);
 		
 		for (Genome genome: genomes) 
@@ -58,6 +56,15 @@ public class Population
 			}
 		}
 		
+		return bestGenome;
+	}
+	
+	public void displayBest() 
+	{
+		Genome bestGenome = getBest();
+		
+		System.out.println("- Best Specimen (Generation: "+generation+")");
+				
 		System.out.println("    - Fitness: "+bestGenome.fitness);
 		
 		System.out.println(bestGenome.getSpecimen());
