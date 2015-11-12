@@ -55,8 +55,8 @@ public class Genome
 		
 		fitness = 0;
 		
-		/*int levensteinDistance = StringUtils.levensteinDistance(specimen, idealSpecimen);
-		fitness += idealSpecimen.length() - levensteinDistance;*/
+		int levensteinDistance = StringUtils.levensteinDistance(specimen, idealSpecimen);
+		fitness += idealSpecimen.length() - levensteinDistance;
 		
 		fitness += StringUtils.directComparison(specimen, idealSpecimen);
 	}
