@@ -46,9 +46,14 @@ public class Population
 	
 	public Genome getBest()
 	{
-		Genome bestGenome = genomes.get(0);
+		ArrayList<Genome> genomesCopy = new ArrayList<Genome>(); 
+		genomesCopy.addAll(genomes);
 		
-		for (Genome genome: genomes) 
+		Collections.shuffle(genomesCopy);
+		
+		Genome bestGenome = genomesCopy.get(0);
+		
+		for (Genome genome: genomesCopy) 
 		{
 			if (genome.fitness>bestGenome.fitness)
 			{
