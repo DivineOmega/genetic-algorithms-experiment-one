@@ -2,7 +2,8 @@ package util;
 
 public abstract class StringUtils 
 {
-	public static int levensteinDistance(String a, String b) {
+	public static int levensteinDistance(String a, String b) 
+	{
         
         int [] costs = new int [b.length() + 1];
         for (int j = 0; j < costs.length; j++)
@@ -19,4 +20,19 @@ public abstract class StringUtils
         }
         return costs[b.length()];
     }
+	
+	public static int directComparison(String a, String b) 
+	{
+		int matchingCharacters = 0;
+		
+		for (int i = 0; i < a.length(); i++) 
+		{
+			if (a.charAt(i)==b.charAt(i))
+			{
+				matchingCharacters++;
+			}
+		}
+		
+		return matchingCharacters;
+	}
 }

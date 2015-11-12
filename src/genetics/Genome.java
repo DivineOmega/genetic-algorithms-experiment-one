@@ -8,6 +8,7 @@ import util.StringUtils;
 public class Genome
 {
 	public String binaryGenome = new String("");
+	public int fitness = -999;
 	
 	public void randomizeGenome()
 	{
@@ -48,14 +49,24 @@ public class Genome
 		return specimen;
 	}
 		
-	public int getFitness(String idealSpecimen)
+	public void determineFitness(String idealSpecimen)
+	{				
+		String specimen = getSpecimen();
+		
+		fitness = 0;
+		
+		/*int levensteinDistance = StringUtils.levensteinDistance(specimen, idealSpecimen);
+		fitness += idealSpecimen.length() - levensteinDistance;*/
+		
+		fitness += StringUtils.directComparison(specimen, idealSpecimen);
+	}
+	
+	public void display() 
 	{
-		int fitness = 0;
-				
-		int levensteinDistance = StringUtils.levensteinDistance(getSpecimen(), idealSpecimen);
+		System.out.println("- Fitness: "+fitness);
 		
-		fitness = idealSpecimen.length() - levensteinDistance;
+		System.out.println(getSpecimen());
 		
-		return fitness;
+		System.out.println();
 	}
 }

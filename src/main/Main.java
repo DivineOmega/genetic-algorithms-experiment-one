@@ -1,15 +1,23 @@
 package main;
 
+import genetics.Genome;
 import genetics.Population;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import util.GenomeUtils;
 
 public class Main
 {
 	public static String idealSpecimen = "";
 	
+	final static int populationSize = 500;
+	
 	public static void main(String[] args)
 	{
+		// Define ideal specimen
+		
 		Scanner keyboard = new Scanner(System.in);
 		
 		System.out.println("Define a 5x5 ideal specimen.");
@@ -28,17 +36,53 @@ public class Main
 			idealSpecimen = idealSpecimen + '\n';
 		}
 		
+		keyboard.close();
+		
 		System.out.println("Ideal specimen defined.");
+		
+		
+		// Create initial population
+				
+		int generation = 1;
 		
 		System.out.println("Generating new population...");
 		
 		Population population = new Population();
 		
-		population.createNew(40);
+		population.createRandom(generation, populationSize);
 		
-		population.evaluate(idealSpecimen);
-		
-		keyboard.close();
+		while(generation<100000)
+		{
+			population.evaluateFitness(idealSpecimen);
+			
+			population.displayBest();
+			
+			generation++;
+			
+			Population newPopulation = new Population();
+			newPopulation.generation = generation;
+			
+			while(newPopulation.genomes.size()<(populationSize*0.02))
+			{
+				Genome newGenome = new Genome();
+				newGenome.randomizeGenome();
+				
+				newPopulation.genomes.add(newGenome);
+			}
+			
+			while(newPopulation.genomes.size()<populationSize)
+			{
+				ArrayList<Genome> selectedParents = population.rouletteWheelSelection();
+				Genome mum = selectedParents.get(0);
+				Genome dad = selectedParents.get(1);
+				
+				Genome child = GenomeUtils.crossover(mum, dad);
+				
+				newPopulation.genomes.add(child);
+			}
+			
+			population = newPopulation;
+		}
 	}
 	
 }
