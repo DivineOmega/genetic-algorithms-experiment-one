@@ -61,7 +61,13 @@ public class Main
 			
 			Population newPopulation = new Population();
 			newPopulation.generation = generation;
-						
+			
+			Genome bestGenome = population.getBest();
+			Genome mutatedBestGenome = GenomeUtils.crossover(bestGenome, bestGenome);
+			
+			newPopulation.genomes.add(bestGenome);
+			newPopulation.genomes.add(mutatedBestGenome);
+			
 			while(newPopulation.genomes.size()<populationSize)
 			{
 				ArrayList<Genome> selectedParents = population.rouletteWheelSelection();
